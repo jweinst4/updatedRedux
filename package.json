@@ -18,10 +18,14 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/react-native-fontawesome": "^0.2.3",
     "axios": "^0.17.1",
     "expo": "^33.0.0",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+    "react-native-svg": "^12.0.3",
     "react-navigation": "^1.5.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",

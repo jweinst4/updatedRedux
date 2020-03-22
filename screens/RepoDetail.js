@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { connect } from 'react-redux';
-import { getRepoDetail } from '../reducer';
+import React, { Component } from "react";
+import { View, Text } from "react-native";
+import { connect } from "react-redux";
+import { getRepoDetail } from "../reducer";
 
 class RepoDetail extends Component {
   static navigationOptions = {
-    title: 'RepoDetail'
+    title: "RepoDetail"
   };
   componentDidMount() {
     const { name } = this.props.navigation.state.params;
-    this.props.getRepoDetail('relferreira', name);
+    this.props.getRepoDetail("relferreira", name);
   }
   render() {
     const { repoInfo, loadingInfo } = this.props;
@@ -44,4 +44,7 @@ const mapDispatchToProps = {
   getRepoDetail
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RepoDetail);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RepoDetail);

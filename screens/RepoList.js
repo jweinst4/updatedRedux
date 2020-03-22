@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { colors } from "../constants/colors";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
 import { listRepos, getStateFunction, changeColorFunction } from "../reducer";
 
