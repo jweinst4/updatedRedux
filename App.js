@@ -13,10 +13,9 @@ import axios from "axios";
 import axiosMiddleware from "redux-axios-middleware";
 
 import reducer from "./reducers/reducer";
-import RepoList from "./screens/RepoList";
-import RepoDetail from "./screens/RepoDetail";
-import Profile from "./screens/Profile";
-import JonTester from "./screens/JonTester";
+import LightShirt from "./screens/LightShirt";
+import Embroidery from "./screens/Embroidery";
+import DarkShirt from "./screens/DarkShirt";
 
 const client = axios.create({
   baseURL: "https://api.github.com",
@@ -27,27 +26,27 @@ const store = createStore(reducer, applyMiddleware(axiosMiddleware(client)));
 
 const Tabs = TabNavigator(
   {
-    RepoList: {
-      screen: RepoList,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="home" size={30} color="blue" />
-        )
-      }
+    LightShirt: {
+      screen: LightShirt
+      // navigationOptions: {
+      //   tabBarIcon: ({ tintColor }) => (
+      //     <Icon name="home" size={30} color="blue" />
+      //   )
+      // }
     },
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name="bed" size={30} color="red" />
-      }
+    DarkShirt: {
+      screen: DarkShirt
+      // navigationOptions: {
+      //   tabBarIcon: ({ tintColor }) => <Icon name="bed" size={30} color="red" />
+      // }
     },
-    Tester: {
-      screen: JonTester,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="h-square" size={30} color="black" />
-        )
-      }
+    Embroidery: {
+      screen: Embroidery
+      // navigationOptions: {
+      //   tabBarIcon: ({ tintColor }) => (
+      //     <Icon name="h-square" size={30} color="black" />
+      //   )
+      // }
     }
   },
   {
@@ -60,8 +59,8 @@ const Tabs = TabNavigator(
       style: {
         backgroundColor: "white"
       },
-      showIcon: true,
-      showLabel: false,
+      // showIcon: true,
+      showLabel: true,
       indicatorStyle: {
         backgroundColor: "pink"
       }
@@ -74,7 +73,7 @@ const Stack = StackNavigator({
     screen: Tabs
   },
   Detail: {
-    screen: RepoDetail
+    screen: Embroidery
   }
 });
 

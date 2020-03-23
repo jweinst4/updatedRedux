@@ -5,6 +5,22 @@ import {
 } from "../constants/prices";
 
 export const calculatedPrice = item => {
+  console.log(item);
+
+  item.location1Stitches = parseInt(item.location1Stitches);
+  item.location2Stitches = parseInt(item.location2Stitches);
+  item.location3Stitches = parseInt(item.location3Stitches);
+  item.location4Stitches = parseInt(item.location4Stitches);
+  item.location5Stitches = parseInt(item.location5Stitches);
+  item.location6Stitches = parseInt(item.location6Stitches);
+
+  item.printSideOneQuantity = parseInt(item.printSideOneQuantity);
+  item.printSideTwoQuantity = parseInt(item.printSideTwoQuantity);
+
+  item.shirtQuantity = parseInt(item.shirtQuantity);
+
+  console.log(item);
+
   price = pricingRouter(item);
 
   return price;
