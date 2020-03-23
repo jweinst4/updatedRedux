@@ -18,10 +18,8 @@ export default function reducer(state = initialState, action) {
     case GET_STATE:
       return { ...state };
     case INCREMENT:
-      console.log("in increment at reducer");
       return { ...state, counter: state.counter + 1 };
     case DECREMENT:
-      console.log("in decrement at reducer");
       return { ...state, counter: state.counter - 1 };
     case CHANGE_COLOR:
       return { ...state, currentColor: action.payload.currentColor };

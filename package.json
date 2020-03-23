@@ -25,6 +25,7 @@
     "expo": "^33.0.0",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+    "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-svg": "^12.0.3",
     "react-navigation": "^1.5.1",
     "react-redux": "^5.0.6",

@@ -61,7 +61,10 @@ const Tabs = TabNavigator(
         backgroundColor: "white"
       },
       showIcon: true,
-      showLabel: false
+      showLabel: false,
+      indicatorStyle: {
+        backgroundColor: "pink"
+      }
     }
   }
 );

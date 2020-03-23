@@ -10,9 +10,11 @@ class Profile extends Component {
   componentDidMount() {}
 
   render() {
-    const { currentColor } = this.props;
+    const { currentColor, counter } = this.props;
     return (
       <View>
+        <Text>Current Color: {currentColor}</Text>
+        <Text>Counter: {counter}</Text>
         <TouchableOpacity onPress={() => this.props.changeColorFunction("red")}>
           <Text>Change to red</Text>
         </TouchableOpacity>
@@ -21,8 +23,9 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = ({ currentColor }) => ({
-  currentColor
+const mapStateToProps = ({ currentColor, counter }) => ({
+  currentColor,
+  counter
 });
 
 const mapDispatchToProps = {
