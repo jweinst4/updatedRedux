@@ -4,9 +4,6 @@ export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
 
 const initialState = {
-  repos: [],
-  repoInfo: {},
-  user: {},
   currentColor: "",
   counter: 0
 };

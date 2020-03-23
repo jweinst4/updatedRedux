@@ -7,8 +7,6 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider, connect } from "react-redux";
 import { StackNavigator, TabNavigator } from "react-navigation";
 
-import Icon from "react-native-vector-icons/FontAwesome";
-
 import axios from "axios";
 import axiosMiddleware from "redux-axios-middleware";
 

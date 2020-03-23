@@ -197,7 +197,9 @@ class Embroidery extends React.Component {
           onChangeText={text => this.setState({ markUp: text })}
           value={this.state.markUp}
         />
-        <Text style={styles.output}>Mark Up: {this.state.markUp * 100}%</Text>
+        <Text style={styles.output}>
+          Mark Up: {parseFloat(this.state.markUp * 100).toFixed(2)}%
+        </Text>
       </View>
     );
   }
@@ -241,7 +243,6 @@ class Embroidery extends React.Component {
     };
     const result = calculatedPrice(request);
 
-    console.log("result at repo list");
     console.log(result);
 
     this.setState({ location1StitchCost: result[0] });
@@ -413,14 +414,14 @@ class Embroidery extends React.Component {
         <View style={styles.resultContainer}>
           <Text style={styles.resultLabel}>Mark Up:</Text>
           <Text style={styles.resultValue}>
-            ${parseFloat(this.state.markUp) * 100}%
+            {(parseFloat(this.state.markUp) * 100).toFixed(2)}%
           </Text>
         </View>
 
         <View style={styles.resultContainer}>
           <Text style={styles.resultLabel}>Profit:</Text>
           <Text style={styles.resultValue}>
-            {parseFloat(this.state.profit).toFixed(2)}
+            ${parseFloat(this.state.profit).toFixed(2)}
           </Text>
         </View>
 
