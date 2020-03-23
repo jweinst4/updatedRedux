@@ -581,7 +581,12 @@ class RepoList extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
+        behavior="padding"
+        enabled
+        keyboardVerticalOffset={100}
+      >
         <ScrollView>
           <View style={styles.container}>
             {this.renderShirtType()}
