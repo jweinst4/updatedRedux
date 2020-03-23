@@ -12,7 +12,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 import axiosMiddleware from "redux-axios-middleware";
 
-import reducer from "./reducer";
+import reducer from "./reducers/reducer";
 import RepoList from "./screens/RepoList";
 import RepoDetail from "./screens/RepoDetail";
 import Profile from "./screens/Profile";

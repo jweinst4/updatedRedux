@@ -1,17 +1,15 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  StyleSheet
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { colors } from "../constants/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
-import { listRepos, getStateFunction, changeColorFunction } from "../reducer";
+import {
+  listRepos,
+  getStateFunction,
+  changeColorFunction,
+  increaseCounter,
+  decreaseCounter
+} from "../reducers/reducer";
 
 class RepoList extends React.Component {
   constructor(props) {
@@ -22,9 +20,7 @@ class RepoList extends React.Component {
     title: "Repositories"
   };
 
-  componentDidMount() {
-    this.props.listRepos("relferreira");
-  }
+  componentDidMount() {}
 
   renderItem = ({ item }) => (
     <TouchableOpacity
@@ -37,10 +33,10 @@ class RepoList extends React.Component {
     </TouchableOpacity>
   );
   render() {
-    const { repos } = this.props;
     return (
       <View>
         <Text>Current Color: {this.props.currentColor}</Text>
+        <Text>Counter: {this.props.counter}</Text>
         <View>
           {colors.map(item => (
             <Text
@@ -51,17 +47,19 @@ class RepoList extends React.Component {
             </Text>
           ))}
         </View>
+        <TouchableOpacity onPress={() => this.props.increaseCounter()}>
+          <Text>INCREMENT</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.decreaseCounter()}>
+          <Text>DECREMENT</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.item}
           onPress={() => this.props.getStateFunction()}
         >
           <Text>Click to get state</Text>
         </TouchableOpacity>
-        {/* <FlatList
-        styles={styles.container}
-        data={repos}
-        renderItem={this.renderItem}
-      /> */}
       </View>
     );
   }
@@ -81,16 +79,20 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   let storedRepositories = state.repos.map(repo => ({ key: repo.id, ...repo }));
   let currentColor = state.currentColor;
+  let counter = state.counter;
   return {
     repos: storedRepositories,
-    currentColor: currentColor
+    currentColor: currentColor,
+    counter: counter
   };
 };
 
 const mapDispatchToProps = {
   listRepos,
   getStateFunction,
-  changeColorFunction
+  changeColorFunction,
+  increaseCounter,
+  decreaseCounter
 };
 
 export default connect(

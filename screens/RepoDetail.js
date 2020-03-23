@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { connect } from "react-redux";
-import { getRepoDetail } from "../reducer";
+import { getRepoDetail } from "../reducers/reducer";
 
 class RepoDetail extends Component {
   static navigationOptions = {
