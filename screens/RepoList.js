@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { colors } from "../constants/colors";
 
 import {
-  listRepos,
   getStateFunction,
   changeColorFunction,
   increaseCounter,
@@ -22,16 +21,6 @@ class RepoList extends React.Component {
 
   componentDidMount() {}
 
-  renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() =>
-        this.props.navigation.navigate("Detail", { name: item.name })
-      }
-    >
-      <Text>{item.name}</Text>
-    </TouchableOpacity>
-  );
   render() {
     return (
       <View>
@@ -77,18 +66,15 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  let storedRepositories = state.repos.map(repo => ({ key: repo.id, ...repo }));
   let currentColor = state.currentColor;
   let counter = state.counter;
   return {
-    repos: storedRepositories,
     currentColor: currentColor,
     counter: counter
   };
 };
 
 const mapDispatchToProps = {
-  listRepos,
   getStateFunction,
   changeColorFunction,
   increaseCounter,

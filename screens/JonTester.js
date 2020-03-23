@@ -19,9 +19,7 @@ class JonTester extends Component {
   }
 }
 
-const mapStateToProps = ({ user, loadingProfile, currentColor }) => ({
-  user,
-  loadingProfile,
+const mapStateToProps = ({ currentColor }) => ({
   currentColor
 });
 

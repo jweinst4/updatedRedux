@@ -1,27 +1,18 @@
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { getUser, changeColorFunction } from "../reducers/reducer";
+import { changeColorFunction } from "../reducers/reducer";
 
 class Profile extends Component {
   static navigationOptions = {
     title: "Profile"
   };
-  componentDidMount() {
-    this.props.getUser("relferreira");
-  }
+  componentDidMount() {}
 
   render() {
-    const { user, loadingProfile, currentColor } = this.props;
-
-    if (loadingProfile) return <Text>Loading...</Text>;
-
-    const { name, login } = user;
+    const { currentColor } = this.props;
     return (
       <View>
-        <Text>Name: {name}</Text>
-        <Text>Login: {login}</Text>
-        <Text>Current Color: {currentColor}</Text>
         <TouchableOpacity onPress={() => this.props.changeColorFunction("red")}>
           <Text>Change to red</Text>
         </TouchableOpacity>
@@ -30,14 +21,11 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = ({ user, loadingProfile, currentColor }) => ({
-  user,
-  loadingProfile,
+const mapStateToProps = ({ currentColor }) => ({
   currentColor
 });
 
 const mapDispatchToProps = {
-  getUser,
   changeColorFunction
 };
 
