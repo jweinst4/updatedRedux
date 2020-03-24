@@ -62,10 +62,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 20,
     width: "100%"
-  },
-  shirtTypeText: {
-    width: "30%",
-    textAlign: "center"
   }
 });
 

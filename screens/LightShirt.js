@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { calculatedPrice } from "../utilities/getResultsCalculator";
+import MarkUp from "../components/MarkUp";
 
 import {
   getStateFunction,
@@ -62,10 +63,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 20,
     width: "100%"
-  },
-  shirtTypeText: {
-    width: "30%",
-    textAlign: "center"
   }
 });
 
@@ -92,6 +89,11 @@ class LightShirt extends React.Component {
 
   static navigationOptions = {
     title: "Light Shirt"
+  };
+
+  handleMarkUpInput = text => {
+    console.log("handling input at lightShirt");
+    this.setState({ markUp: text });
   };
 
   renderInputOutputHeader() {
@@ -207,17 +209,11 @@ class LightShirt extends React.Component {
 
   renderMarkUp() {
     return (
-      <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Mark Up</Text>
-        <TextInput
-          style={styles.textInput}
-          label={"Mark Up"}
-          onChangeText={text => this.setState({ markUp: text })}
-          value={this.state.markUp}
+      <View>
+        <MarkUp
+          markUp={this.state.markUp}
+          handleMarkUpInput={this.handleMarkUpInput}
         />
-        <Text style={styles.output}>
-          Mark Up: {parseFloat(this.state.markUp * 100).toFixed(2)}%
-        </Text>
       </View>
     );
   }
