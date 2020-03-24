@@ -10,6 +10,11 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { calculatedPrice } from "../utilities/getResultsCalculator";
+import ShirtQuantity from "../components/ShirtQuantity";
+import PrintSideOneQuantity from "../components/PrintSideOneQuantity";
+import PrintSideTwoQuantity from "../components/PrintSideTwoQuantity";
+import ShirtCost from "../components/ShirtCost";
+import MarkUp from "../components/MarkUp";
 
 import {
   getStateFunction,
@@ -90,6 +95,26 @@ class DarkShirt extends React.Component {
     title: "Dark Shirt"
   };
 
+  handleShirtQuantityInput = text => {
+    this.setState({ shirtQuantity: text });
+  };
+
+  handlePrintSideOneQuantityInput = text => {
+    this.setState({ printSideOneQuantity: text });
+  };
+
+  handlePrintSideTwoQuantityInput = text => {
+    this.setState({ printSideTwoQuantity: text });
+  };
+
+  handleShirtCostInput = text => {
+    this.setState({ shirtCost: text });
+  };
+
+  handleMarkUpInput = text => {
+    this.setState({ markUp: text });
+  };
+
   renderInputOutputHeader() {
     return (
       <View style={styles.inputOutputHeader}>
@@ -100,7 +125,6 @@ class DarkShirt extends React.Component {
   }
 
   clearEntries() {
-    console.log("in clear entries");
     this.setState({ shirtQuantity: 0 }),
       this.setState({ printSideOneQuantity: 0 }),
       this.setState({ printSideTwoQuantity: 0 }),
@@ -138,82 +162,55 @@ class DarkShirt extends React.Component {
 
   renderShirtQuantity() {
     return (
-      <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Shirt Quantity</Text>
-        <TextInput
-          autoFocus={true}
-          style={styles.textInput}
-          label={"Shirt Quantity"}
-          value={this.state.shirtQuantity}
-          onChangeText={text => this.setState({ shirtQuantity: text })}
+      <View>
+        <ShirtQuantity
+          shirtQuantity={this.state.shirtQuantity}
+          handleShirtQuantityInput={this.handleShirtQuantityInput}
         />
-        <Text style={styles.output}>Quantity: {this.state.shirtQuantity}</Text>
       </View>
     );
   }
 
   renderPrintSideOneQuantity() {
     return (
-      <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Print Side One Quantity</Text>
-        <TextInput
-          style={styles.textInput}
-          label={"Print Side One Quantity"}
-          onChangeText={text => this.setState({ printSideOneQuantity: text })}
-          value={this.state.printSideOneQuantity}
+      <View>
+        <PrintSideOneQuantity
+          printSideOneQuantity={this.state.printSideOneQuantity}
+          handlePrintSideOneQuantityInput={this.handlePrintSideOneQuantityInput}
         />
-        <Text style={styles.output}>
-          Print Side One Quantity: {this.state.printSideOneQuantity}
-        </Text>
       </View>
     );
   }
 
   renderPrintSideTwoQuantity() {
     return (
-      <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Print Side Two Quantity</Text>
-        <TextInput
-          style={styles.textInput}
-          label={"Print Side Two Quantity"}
-          onChangeText={text => this.setState({ printSideTwoQuantity: text })}
-          value={this.state.printSideTwoQuantity}
+      <View>
+        <PrintSideTwoQuantity
+          printSideTwoQuantity={this.state.printSideTwoQuantity}
+          handlePrintSideTwoQuantityInput={this.handlePrintSideTwoQuantityInput}
         />
-        <Text style={styles.output}>
-          Print Side Two Quantity: {this.state.printSideTwoQuantity}
-        </Text>
       </View>
     );
   }
 
   renderShirtCost() {
     return (
-      <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Shirt Cost</Text>
-        <TextInput
-          style={styles.textInput}
-          label={"Shirt Cost"}
-          onChangeText={text => this.setState({ shirtCost: text })}
-          value={this.state.shirtCost}
+      <View>
+        <ShirtCost
+          shirtCost={this.state.shirtCost}
+          handleShirtCostInput={this.handleShirtCostInput}
         />
-        <Text style={styles.output}>Shirt Cost:$ {this.state.shirtCost}</Text>
       </View>
     );
   }
 
   renderMarkUp() {
     return (
-      <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Mark Up</Text>
-        <TextInput
-          style={styles.textInput}
-          label={"Mark Up"}
-          onChangeText={text => this.setState({ markUp: text })}
-          value={this.state.markUp}
+      <View>
+        <MarkUp
+          markUp={this.state.markUp}
+          handleMarkUpInput={this.handleMarkUpInput}
         />
-        <Text style={styles.output}>
-          Mark Up: {(this.state.markUp * 100).toFixed(2)}%
-        </Text>
       </View>
     );
   }
@@ -252,8 +249,6 @@ class DarkShirt extends React.Component {
       type: this.state.shirtType
     };
     const result = calculatedPrice(request);
-
-    console.log(result);
 
     this.setState({ printSideOneCost: result[0] });
     this.setState({ printSideTwoCost: result[1] });

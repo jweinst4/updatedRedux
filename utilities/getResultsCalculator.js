@@ -5,8 +5,6 @@ import {
 } from "../constants/prices";
 
 export const calculatedPrice = item => {
-  console.log(item);
-
   item.location1Stitches = parseInt(item.location1Stitches);
   item.location2Stitches = parseInt(item.location2Stitches);
   item.location3Stitches = parseInt(item.location3Stitches);
@@ -18,8 +16,6 @@ export const calculatedPrice = item => {
   item.printSideTwoQuantity = parseInt(item.printSideTwoQuantity);
 
   item.shirtQuantity = parseInt(item.shirtQuantity);
-
-  console.log(item);
 
   price = pricingRouter(item);
 
@@ -37,7 +33,6 @@ pricingRouter = item => {
 };
 
 calculateEmbroideredShirt = item => {
-  console.log("embroidery below");
   let price1 = 0;
   let price2 = 0;
   let price3 = 0;
@@ -68,8 +63,6 @@ calculateEmbroideredShirt = item => {
   const embroideredPriceArrayLocation6 = embroideryArray.filter(function(i) {
     return i.max >= item.location6Stitches && i.min <= item.location6Stitches;
   });
-
-  console.log(embroideredPriceArrayLocation1);
 
   if (item.shirtQuantity >= 1 && item.shirtQuantity <= 5) {
     price1 = embroideredPriceArrayLocation1[0].prices[0];

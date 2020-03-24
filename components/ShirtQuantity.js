@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class MarkUp extends React.Component {
+class ShirtQuantity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -41,19 +41,18 @@ class MarkUp extends React.Component {
   render() {
     return (
       <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Mark Up</Text>
+        <Text style={styles.label}>Shirt Quantity</Text>
         <TextInput
+          autoFocus={true}
           style={styles.textInput}
-          label={"Mark Up"}
-          onChangeText={text => this.props.handleMarkUpInput(text)}
-          value={this.props.markUp}
+          label={"Shirt Quantity"}
+          value={this.props.shirtQuantity}
+          onChangeText={text => this.props.handleShirtQuantityInput(text)}
         />
-        <Text style={styles.output}>
-          Mark Up: {parseFloat(this.props.markUp * 100).toFixed(2)}%
-        </Text>
+        <Text style={styles.output}>Quantity: {this.props.shirtQuantity}</Text>
       </View>
     );
   }
 }
 
-export default connect()(MarkUp);
+export default connect()(ShirtQuantity);

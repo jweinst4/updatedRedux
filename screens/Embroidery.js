@@ -108,7 +108,6 @@ class Embroidery extends React.Component {
   }
 
   clearEntries() {
-    console.log("in clear entries");
     this.setState({ shirtQuantity: 0 }),
       this.setState({ shirtCost: 0 }),
       this.setState({ markUp: 0 }),
@@ -238,8 +237,6 @@ class Embroidery extends React.Component {
       location6Stitches: this.state.location6Stitches
     };
     const result = calculatedPrice(request);
-
-    console.log(result);
 
     this.setState({ location1StitchCost: result[0] });
     this.setState({ location2StitchCost: result[1] });

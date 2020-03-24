@@ -8,8 +8,6 @@ const initialState = {
   counter: 0
 };
 
-console.log("in reducer");
-
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_STATE:

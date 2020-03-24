@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class MarkUp extends React.Component {
+class PrintSideOneQuantity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -41,19 +41,21 @@ class MarkUp extends React.Component {
   render() {
     return (
       <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Mark Up</Text>
+        <Text style={styles.label}>Print Side One Quantity</Text>
         <TextInput
           style={styles.textInput}
-          label={"Mark Up"}
-          onChangeText={text => this.props.handleMarkUpInput(text)}
-          value={this.props.markUp}
+          label={"Print Side One Quantity"}
+          onChangeText={text =>
+            this.props.handlePrintSideOneQuantityInput(text)
+          }
+          value={this.props.printSideOneQuantity}
         />
         <Text style={styles.output}>
-          Mark Up: {parseFloat(this.props.markUp * 100).toFixed(2)}%
+          Print Side One Quantity: {this.props.printSideOneQuantity}
         </Text>
       </View>
     );
   }
 }
 
-export default connect()(MarkUp);
+export default connect()(PrintSideOneQuantity);
