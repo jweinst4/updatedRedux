@@ -16,6 +16,7 @@ import PrintSideTwoQuantity from "../components/PrintSideTwoQuantity";
 import ShirtCost from "../components/ShirtCost";
 import MarkUp from "../components/MarkUp";
 import Results from "../components/Results";
+import ClothingType from "../components/ClothingType";
 
 import {
   getStateFunction,
@@ -88,12 +89,13 @@ class DarkShirt extends React.Component {
       netCost: 0,
       profit: 0,
       totalCost: 0,
-      totalProfit: 0
+      totalProfit: 0,
+      clothingType: "Tee"
     };
   }
 
   static navigationOptions = {
-    title: "2) Dark Shirt",
+    title: "2) Dark",
     backgroundColor: "red"
   };
 
@@ -142,10 +144,24 @@ class DarkShirt extends React.Component {
       this.setState({ totalProfit: 0 });
   }
 
+  renderClothingType() {
+    return (
+      <View style={{ width: "100%" }}>
+        <ClothingType
+          clothingType={this.state.clothingType}
+          handleClothingType={this.handleClothingType.bind(this)}
+        />
+      </View>
+    );
+  }
+
   renderClearEntriesButton() {
     return (
       <View>
-        <TouchableOpacity onPress={() => this.clearEntries()}>
+        <TouchableOpacity
+          style={{ marginTop: 5 }}
+          onPress={() => this.clearEntries()}
+        >
           <Text
             style={{
               fontSize: 16,
@@ -241,6 +257,11 @@ class DarkShirt extends React.Component {
     );
   }
 
+  handleClothingType(value) {
+    this.setState({ clothingType: value });
+    this.setState({ showResults: false });
+  }
+
   getResults() {
     const request = {
       shirtQuantity: this.state.shirtQuantity,
@@ -252,10 +273,29 @@ class DarkShirt extends React.Component {
     };
     const result = calculatedPrice(request);
 
+    let priceToAdd = 0;
+
+    if (this.state.clothingType === "Tee") {
+      priceToAdd = 0;
+    } else if (
+      this.state.clothingType === "Jersey" ||
+      this.state.clothingType === "Polo" ||
+      this.state.clothingType === "Sweatshirt"
+    ) {
+      priceToAdd =
+        0.25 * parseInt(this.state.printSideOneQuantity) +
+        0.25 * parseInt(this.state.printSideTwoQuantity);
+    } else if (this.state.clothingType === "Hooded Sweatshirt") {
+      priceToAdd =
+        0.5 * parseInt(this.state.printSideOneQuantity) +
+        0.5 * parseInt(this.state.printSideTwoQuantity);
+    }
+
     this.setState({ printSideOneCost: result[0] });
     this.setState({ printSideTwoCost: result[1] });
 
-    let netCostHere = parseFloat(this.state.shirtCost) + result[0] + result[1];
+    let netCostHere =
+      parseFloat(this.state.shirtCost) + result[0] + result[1] + priceToAdd;
     let profitHere = netCostHere * parseFloat(this.state.markUp / 100);
     let totalCostHere = netCostHere + profitHere;
     let totalProfitHere = profitHere * parseInt(this.state.shirtQuantity);
@@ -307,7 +347,7 @@ class DarkShirt extends React.Component {
       >
         <ScrollView>
           <View style={styles.container}>
-            {this.renderClearEntriesButton()}
+            {this.renderClothingType()}
             {this.state.showResults ? this.renderResults() : null}
             {/* {this.renderInputOutputHeader()} */}
             {this.renderShirtQuantity()}
@@ -315,6 +355,7 @@ class DarkShirt extends React.Component {
             {this.renderShirtCost()}
             {this.renderMarkUp()}
             {this.renderGetResultsButton()}
+            {this.renderClearEntriesButton()}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

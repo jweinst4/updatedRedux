@@ -57,7 +57,8 @@ const Tabs = TabNavigator(
         borderRadius: 5,
         padding: 5,
         fontSize: 12,
-        backgroundColor: "lightblue"
+        backgroundColor: "lightblue",
+        width: "100%"
       },
       style: {
         backgroundColor: "white"

@@ -150,7 +150,10 @@ class Embroidery extends React.Component {
   renderClearEntriesButton() {
     return (
       <View>
-        <TouchableOpacity onPress={() => this.clearEntries()}>
+        <TouchableOpacity
+          style={{ marginTop: 5 }}
+          onPress={() => this.clearEntries()}
+        >
           <Text
             style={{
               fontSize: 16,
@@ -382,7 +385,6 @@ class Embroidery extends React.Component {
       >
         <ScrollView>
           <View style={styles.container}>
-            {this.renderClearEntriesButton()}
             {this.state.showResults ? this.renderResults() : null}
             {/* {this.renderInputOutputHeader()} */}
             {this.renderShirtQuantity()}
@@ -390,6 +392,7 @@ class Embroidery extends React.Component {
             {this.renderShirtCost()}
             {this.renderMarkUp()}
             {this.renderGetResultsButton()}
+            {this.renderClearEntriesButton()}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
