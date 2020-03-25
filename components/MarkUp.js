@@ -49,7 +49,7 @@ class MarkUp extends React.Component {
           value={this.props.markUp}
         />
         <Text style={styles.output}>
-          Mark Up: {parseFloat(this.props.markUp * 100).toFixed(2)}%
+          Mark Up: {parseFloat(this.props.markUp).toFixed(2)}%
         </Text>
       </View>
     );

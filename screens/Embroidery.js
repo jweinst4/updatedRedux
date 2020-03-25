@@ -10,6 +10,10 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { calculatedPrice } from "../utilities/getResultsCalculator";
+import ShirtQuantity from "../components/ShirtQuantity";
+import ShirtCost from "../components/ShirtCost";
+import MarkUp from "../components/MarkUp";
+import Results from "../components/Results";
 
 import {
   getStateFunction,
@@ -95,7 +99,19 @@ class Embroidery extends React.Component {
   }
 
   static navigationOptions = {
-    title: "Embroidery"
+    title: "3) Embroidery"
+  };
+
+  handleShirtQuantityInput = text => {
+    this.setState({ shirtQuantity: text });
+  };
+
+  handleShirtCostInput = text => {
+    this.setState({ shirtCost: text });
+  };
+
+  handleMarkUpInput = text => {
+    this.setState({ markUp: text });
   };
 
   renderInputOutputHeader() {
@@ -153,48 +169,33 @@ class Embroidery extends React.Component {
 
   renderShirtQuantity() {
     return (
-      <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Shirt Quantity</Text>
-        <TextInput
-          autoFocus={true}
-          style={styles.textInput}
-          label={"Shirt Quantity"}
-          value={this.state.shirtQuantity}
-          onChangeText={text => this.setState({ shirtQuantity: text })}
+      <View>
+        <ShirtQuantity
+          shirtQuantity={this.state.shirtQuantity}
+          handleShirtQuantityInput={this.handleShirtQuantityInput}
         />
-        <Text style={styles.output}>Quantity: {this.state.shirtQuantity}</Text>
       </View>
     );
   }
 
   renderShirtCost() {
     return (
-      <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Shirt Cost</Text>
-        <TextInput
-          style={styles.textInput}
-          label={"Shirt Cost"}
-          onChangeText={text => this.setState({ shirtCost: text })}
-          value={this.state.shirtCost}
+      <View>
+        <ShirtCost
+          shirtCost={this.state.shirtCost}
+          handleShirtCostInput={this.handleShirtCostInput}
         />
-        <Text style={styles.output}>Shirt Cost:$ {this.state.shirtCost}</Text>
       </View>
     );
   }
 
   renderMarkUp() {
     return (
-      <View style={styles.textInputAndLabelContainer}>
-        <Text style={styles.label}>Mark Up</Text>
-        <TextInput
-          style={styles.textInput}
-          label={"Mark Up"}
-          onChangeText={text => this.setState({ markUp: text })}
-          value={this.state.markUp}
+      <View>
+        <MarkUp
+          markUp={this.state.markUp}
+          handleMarkUpInput={this.handleMarkUpInput}
         />
-        <Text style={styles.output}>
-          Mark Up: {parseFloat(this.state.markUp * 100).toFixed(2)}%
-        </Text>
       </View>
     );
   }
@@ -253,7 +254,7 @@ class Embroidery extends React.Component {
       result[3] +
       result[4] +
       result[5];
-    let profitHere = netCostHere * parseFloat(this.state.markUp);
+    let profitHere = netCostHere * parseFloat(this.state.markUp / 100);
     let totalCostHere = netCostHere + profitHere;
     let totalProfitHere = profitHere * parseInt(this.state.shirtQuantity);
 
@@ -345,92 +346,28 @@ class Embroidery extends React.Component {
   renderResults() {
     return (
       <View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Quantity:</Text>
-          <Text style={styles.resultValue}>{this.state.shirtQuantity}</Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Location 1 Stitch Price:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.location1StitchCost).toFixed(2)}
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Location 2 Stitch Price:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.location2StitchCost).toFixed(2)}
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Location 3 Stitch Price:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.location3StitchCost).toFixed(2)}
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Location 4 Stitch Price:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.location4StitchCost).toFixed(2)}
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Location 5 Stitch Price:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.location5StitchCost).toFixed(2)}
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Location 6 Stitch Price:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.location6StitchCost).toFixed(2)}
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Shirt Cost:</Text>
-          <Text style={styles.resultValue}>${this.state.shirtCost}</Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Net Cost:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.netCost).toFixed(2)}
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Mark Up:</Text>
-          <Text style={styles.resultValue}>
-            {(parseFloat(this.state.markUp) * 100).toFixed(2)}%
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Profit:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.profit).toFixed(2)}
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Total Cost:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.totalCost).toFixed(2)}
-          </Text>
-        </View>
-
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Total Profit:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.totalProfit).toFixed(2)}
-          </Text>
-        </View>
+        <Results
+          shirtQuantity={this.state.shirtQuantity}
+          shirtCost={this.state.shirtCost}
+          location1Stitches={this.state.location1Stitches}
+          location2Stitches={this.state.location2Stitches}
+          location3Stitches={this.state.location3Stitches}
+          location4Stitches={this.state.location4Stitches}
+          location5Stitches={this.state.location5Stitches}
+          location6Stitches={this.state.location6Stitches}
+          location1StitchCost={this.state.location1StitchCost}
+          location2StitchCost={this.state.location2StitchCost}
+          location3StitchCost={this.state.location3StitchCost}
+          location4StitchCost={this.state.location4StitchCost}
+          location5StitchCost={this.state.location5StitchCost}
+          location6StitchCost={this.state.location6StitchCost}
+          netCost={this.state.netCost}
+          markUp={this.state.markUp}
+          profit={this.state.profit}
+          totalCost={this.state.totalCost}
+          totalProfit={this.state.totalProfit}
+          shirtType={this.state.shirtType}
+        />
       </View>
     );
   }

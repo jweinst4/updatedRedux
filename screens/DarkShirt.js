@@ -15,6 +15,7 @@ import PrintSideOneQuantity from "../components/PrintSideOneQuantity";
 import PrintSideTwoQuantity from "../components/PrintSideTwoQuantity";
 import ShirtCost from "../components/ShirtCost";
 import MarkUp from "../components/MarkUp";
+import Results from "../components/Results";
 
 import {
   getStateFunction,
@@ -92,7 +93,8 @@ class DarkShirt extends React.Component {
   }
 
   static navigationOptions = {
-    title: "Dark Shirt"
+    title: "2) Dark Shirt",
+    backgroundColor: "red"
   };
 
   handleShirtQuantityInput = text => {
@@ -254,7 +256,7 @@ class DarkShirt extends React.Component {
     this.setState({ printSideTwoCost: result[1] });
 
     let netCostHere = parseFloat(this.state.shirtCost) + result[0] + result[1];
-    let profitHere = netCostHere * parseFloat(this.state.markUp);
+    let profitHere = netCostHere * parseFloat(this.state.markUp / 100);
     let totalCostHere = netCostHere + profitHere;
     let totalProfitHere = profitHere * parseInt(this.state.shirtQuantity);
 
@@ -277,64 +279,20 @@ class DarkShirt extends React.Component {
   renderResults() {
     return (
       <View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Quantity:</Text>
-          <Text style={styles.resultValue}>{this.state.shirtQuantity}</Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Print Side One Quantity:</Text>
-          <Text style={styles.resultValue}>
-            {this.state.printSideOneQuantity}
-          </Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Print Side Two Quantity:</Text>
-          <Text style={styles.resultValue}>
-            {this.state.printSideTwoQuantity}
-          </Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Print Side One Cost</Text>
-          <Text style={styles.resultValue}>${this.state.printSideOneCost}</Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Print Side Two Cost:</Text>
-          <Text style={styles.resultValue}>${this.state.printSideTwoCost}</Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Shirt Cost:</Text>
-          <Text style={styles.resultValue}>${this.state.shirtCost}</Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Net Cost:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.netCost).toFixed(2)}
-          </Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Mark Up:</Text>
-          <Text style={styles.resultValue}>
-            {(parseFloat(this.state.markUp) * 100).toFixed(2)}%
-          </Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Profit:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.profit).toFixed(2)}
-          </Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Total Cost:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.totalCost).toFixed(2)}
-          </Text>
-        </View>
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Total Profit:</Text>
-          <Text style={styles.resultValue}>
-            ${parseFloat(this.state.totalProfit).toFixed(2)}
-          </Text>
-        </View>
+        <Results
+          shirtQuantity={this.state.shirtQuantity}
+          printSideOneQuantity={this.state.printSideOneQuantity}
+          printSideTwoQuantity={this.state.printSideTwoQuantity}
+          printSideOneCost={this.state.printSideOneCost}
+          printSideTwoCost={this.state.printSideTwoCost}
+          shirtCost={this.state.shirtCost}
+          netCost={this.state.netCost}
+          markUp={this.state.markUp}
+          profit={this.state.profit}
+          totalCost={this.state.totalCost}
+          totalProfit={this.state.totalProfit}
+          shirtType={this.state.shirtType}
+        />
       </View>
     );
   }

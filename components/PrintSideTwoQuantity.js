@@ -48,6 +48,7 @@ class PrintSideTwoQuantity extends React.Component {
           onChangeText={text =>
             this.props.handlePrintSideTwoQuantityInput(text)
           }
+          ref={ref => (this.middleRef = ref)}
           value={this.props.printSideTwoQuantity}
         />
         <Text style={styles.output}>
