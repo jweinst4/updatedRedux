@@ -17,6 +17,7 @@ import ShirtCost from "../components/ShirtCost";
 import MarkUp from "../components/MarkUp";
 import Results from "../components/Results";
 import ClothingType from "../components/ClothingType";
+import BottomBar from "../components/BottomBar";
 
 import {
   getStateFunction,
@@ -307,14 +308,13 @@ class DarkShirt extends React.Component {
     );
   }
 
+  renderExtraSpace() {
+    return <View style={{ height: 320 }}></View>;
+  }
+
   render() {
     return (
-      <KeyboardAvoidingView
-        style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
-        behavior="padding"
-        enabled
-        keyboardVerticalOffset={100}
-      >
+      <View>
         <ScrollView>
           <View style={styles.container}>
             {this.renderClothingType()}
@@ -323,11 +323,14 @@ class DarkShirt extends React.Component {
             {this.renderNormalShirt()}
             {this.renderShirtCost()}
             {this.renderMarkUp()}
-            {this.renderGetResultsButton()}
-            {this.renderClearEntriesButton()}
+            {this.renderExtraSpace()}
           </View>
         </ScrollView>
-      </KeyboardAvoidingView>
+        <BottomBar
+          getResults={this.getResults.bind(this)}
+          clearEntries={this.clearEntries.bind(this)}
+        />
+      </View>
     );
   }
 }

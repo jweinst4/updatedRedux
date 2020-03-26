@@ -15,6 +15,7 @@ import ShirtCost from "../components/ShirtCost";
 import MarkUp from "../components/MarkUp";
 import Results from "../components/Results";
 import EmbroideryStitchCountInputs from "../components/EmbroideryStitchCountInputs";
+import BottomBar from "../components/BottomBar";
 
 import {
   getStateFunction,
@@ -195,30 +196,6 @@ class Embroidery extends React.Component {
     );
   }
 
-  renderGetResultsButton() {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          this.getResults();
-        }}
-      >
-        <View style={{ marginTop: 20 }}>
-          <Text
-            style={{
-              fontSize: 16,
-              borderWidth: 1,
-              borderRadius: 5,
-              width: "50%",
-              paddingLeft: 5
-            }}
-          >
-            Get Price
-          </Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
   getResults() {
     const request = {
       shirtQuantity: this.state.shirtQuantity,
@@ -324,14 +301,13 @@ class Embroidery extends React.Component {
     );
   }
 
+  renderExtraSpace() {
+    return <View style={{ height: 270 }}></View>;
+  }
+
   render() {
     return (
-      <KeyboardAvoidingView
-        style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
-        behavior="padding"
-        enabled
-        keyboardVerticalOffset={100}
-      >
+      <View>
         <ScrollView>
           <View style={styles.container}>
             {this.state.showResults ? this.renderResults() : null}
@@ -339,11 +315,14 @@ class Embroidery extends React.Component {
             {this.renderEmbroideryStitchCountInputs()}
             {this.renderShirtCost()}
             {this.renderMarkUp()}
-            {this.renderGetResultsButton()}
-            {this.renderClearEntriesButton()}
+            {this.renderExtraSpace()}
           </View>
         </ScrollView>
-      </KeyboardAvoidingView>
+        <BottomBar
+          getResults={this.getResults.bind(this)}
+          clearEntries={this.clearEntries.bind(this)}
+        />
+      </View>
     );
   }
 }
