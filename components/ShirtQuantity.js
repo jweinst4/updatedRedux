@@ -43,7 +43,6 @@ class ShirtQuantity extends React.Component {
       <View style={styles.textInputAndLabelContainer}>
         <Text style={styles.label}>Shirt Quantity</Text>
         <TextInput
-          autoFocus={true}
           style={styles.textInput}
           label={"Shirt Quantity"}
           value={this.props.shirtQuantity}

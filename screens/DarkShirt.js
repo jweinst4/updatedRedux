@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { calculatedPrice } from "../utilities/getResultsCalculator";
+import { parseResults } from "../utilities/parseResults";
 import ShirtQuantity from "../components/ShirtQuantity";
 import PrintSideOneQuantity from "../components/PrintSideOneQuantity";
 import PrintSideTwoQuantity from "../components/PrintSideTwoQuantity";
@@ -118,15 +119,6 @@ class DarkShirt extends React.Component {
   handleMarkUpInput = text => {
     this.setState({ markUp: text });
   };
-
-  renderInputOutputHeader() {
-    return (
-      <View style={styles.inputOutputHeader}>
-        <Text style={{ ...styles.output, textAlign: "center" }}>Input</Text>
-        <Text style={{ ...styles.output, textAlign: "center" }}>Output</Text>
-      </View>
-    );
-  }
 
   clearEntries() {
     this.setState({ shirtQuantity: 0 }),
@@ -273,37 +265,16 @@ class DarkShirt extends React.Component {
     };
     const result = calculatedPrice(request);
 
-    let priceToAdd = 0;
+    const data = [result, this.state];
 
-    if (this.state.clothingType === "Tee") {
-      priceToAdd = 0;
-    } else if (
-      this.state.clothingType === "Jersey" ||
-      this.state.clothingType === "Polo" ||
-      this.state.clothingType === "Sweatshirt"
-    ) {
-      priceToAdd =
-        0.25 * parseInt(this.state.printSideOneQuantity) +
-        0.25 * parseInt(this.state.printSideTwoQuantity);
-    } else if (this.state.clothingType === "Hooded Sweatshirt") {
-      priceToAdd =
-        0.5 * parseInt(this.state.printSideOneQuantity) +
-        0.5 * parseInt(this.state.printSideTwoQuantity);
-    }
+    const parsedResult = parseResults(data);
 
     this.setState({ printSideOneCost: result[0] });
     this.setState({ printSideTwoCost: result[1] });
-
-    let netCostHere =
-      parseFloat(this.state.shirtCost) + result[0] + result[1] + priceToAdd;
-    let profitHere = netCostHere * parseFloat(this.state.markUp / 100);
-    let totalCostHere = netCostHere + profitHere;
-    let totalProfitHere = profitHere * parseInt(this.state.shirtQuantity);
-
-    this.setState({ netCost: netCostHere });
-    this.setState({ profit: profitHere });
-    this.setState({ totalCost: totalCostHere });
-    this.setState({ totalProfit: totalProfitHere });
+    this.setState({ netCost: parsedResult[0] });
+    this.setState({ profit: parsedResult[1] });
+    this.setState({ totalCost: parsedResult[2] });
+    this.setState({ totalProfit: parsedResult[3] });
     this.setState({ showResults: true });
   }
 
@@ -349,7 +320,6 @@ class DarkShirt extends React.Component {
           <View style={styles.container}>
             {this.renderClothingType()}
             {this.state.showResults ? this.renderResults() : null}
-            {/* {this.renderInputOutputHeader()} */}
             {this.renderShirtQuantity()}
             {this.renderNormalShirt()}
             {this.renderShirtCost()}

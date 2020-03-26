@@ -10,10 +10,12 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { calculatedPrice } from "../utilities/getResultsCalculator";
+import { parseResults } from "../utilities/parseResults";
 import ShirtQuantity from "../components/ShirtQuantity";
 import ShirtCost from "../components/ShirtCost";
 import MarkUp from "../components/MarkUp";
 import Results from "../components/Results";
+import EmbroideryStitchCountInputs from "../components/EmbroideryStitchCountInputs";
 
 import {
   getStateFunction,
@@ -113,15 +115,6 @@ class Embroidery extends React.Component {
   handleMarkUpInput = text => {
     this.setState({ markUp: text });
   };
-
-  renderInputOutputHeader() {
-    return (
-      <View style={styles.inputOutputHeader}>
-        <Text style={{ ...styles.output, textAlign: "center" }}>Input</Text>
-        <Text style={{ ...styles.output, textAlign: "center" }}>Output</Text>
-      </View>
-    );
-  }
 
   clearEntries() {
     this.setState({ shirtQuantity: 0 }),
@@ -242,6 +235,10 @@ class Embroidery extends React.Component {
     };
     const result = calculatedPrice(request);
 
+    const data = [result, this.state];
+
+    const parsedResult = parseResults(data);
+
     this.setState({ location1StitchCost: result[0] });
     this.setState({ location2StitchCost: result[1] });
     this.setState({ location3StitchCost: result[2] });
@@ -249,99 +246,52 @@ class Embroidery extends React.Component {
     this.setState({ location5StitchCost: result[4] });
     this.setState({ location6StitchCost: result[5] });
 
-    let netCostHere =
-      parseFloat(this.state.shirtCost) +
-      result[0] +
-      result[1] +
-      result[2] +
-      result[3] +
-      result[4] +
-      result[5];
-    let profitHere = netCostHere * parseFloat(this.state.markUp / 100);
-    let totalCostHere = netCostHere + profitHere;
-    let totalProfitHere = profitHere * parseInt(this.state.shirtQuantity);
-
-    this.setState({ netCost: netCostHere });
-    this.setState({ profit: profitHere });
-    this.setState({ totalCost: totalCostHere });
-    this.setState({ totalProfit: totalProfitHere });
+    this.setState({ netCost: parsedResult[0] });
+    this.setState({ profit: parsedResult[1] });
+    this.setState({ totalCost: parsedResult[2] });
+    this.setState({ totalProfit: parsedResult[3] });
     this.setState({ showResults: true });
   }
 
-  renderEmbroidery() {
+  handleEmbroideryStitchCountInputs = (text, stitchLocation) => {
+    switch (stitchLocation) {
+      case 1:
+        this.setState({ location1Stitches: text });
+        break;
+      case 2:
+        this.setState({ location2Stitches: text });
+        break;
+      case 3:
+        this.setState({ location3Stitches: text });
+        break;
+      case 4:
+        this.setState({ location4Stitches: text });
+        break;
+      case 5:
+        this.setState({ location5Stitches: text });
+        break;
+      case 6:
+        this.setState({ location6Stitches: text });
+        break;
+      default:
+        break;
+    }
+  };
+
+  renderEmbroideryStitchCountInputs() {
     return (
       <View>
-        <View style={styles.textInputAndLabelContainer}>
-          <Text style={styles.label}>Location 1 Stitches</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={text => this.setState({ location1Stitches: text })}
-            value={this.state.location1Stitches}
-          />
-          <Text style={styles.output}>
-            Location 1 Stitches: {this.state.location1Stitches}
-          </Text>
-        </View>
-
-        <View style={styles.textInputAndLabelContainer}>
-          <Text style={styles.label}>Location 2 Stitches</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={text => this.setState({ location2Stitches: text })}
-            value={this.state.location2Stitches}
-          />
-          <Text style={styles.output}>
-            Location 2 Stitches: {this.state.location2Stitches}
-          </Text>
-        </View>
-
-        <View style={styles.textInputAndLabelContainer}>
-          <Text style={styles.label}>Location 3 Stitches</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={text => this.setState({ location3Stitches: text })}
-            value={this.state.location3Stitches}
-          />
-          <Text style={styles.output}>
-            Location 3 Stitches: {this.state.location3Stitches}
-          </Text>
-        </View>
-
-        <View style={styles.textInputAndLabelContainer}>
-          <Text style={styles.label}>Location 4 Stitches</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={text => this.setState({ location4Stitches: text })}
-            value={this.state.location4Stitches}
-          />
-          <Text style={styles.output}>
-            Location 4 Stitches: {this.state.location4Stitches}
-          </Text>
-        </View>
-
-        <View style={styles.textInputAndLabelContainer}>
-          <Text style={styles.label}>Location 5 Stitches</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={text => this.setState({ location5Stitches: text })}
-            value={this.state.location5Stitches}
-          />
-          <Text style={styles.output}>
-            Location 5 Stitches: {this.state.location5Stitches}
-          </Text>
-        </View>
-
-        <View style={styles.textInputAndLabelContainer}>
-          <Text style={styles.label}>Location 6 Stitches</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={text => this.setState({ location6Stitches: text })}
-            value={this.state.location6Stitches}
-          />
-          <Text style={styles.output}>
-            Location 6 Stitches: {this.state.location6Stitches}
-          </Text>
-        </View>
+        <EmbroideryStitchCountInputs
+          handleEmbroideryStitchCountInputs={
+            this.handleEmbroideryStitchCountInputs
+          }
+          location1Stitches={this.state.location1Stitches}
+          location2Stitches={this.state.location2Stitches}
+          location3Stitches={this.state.location3Stitches}
+          location4Stitches={this.state.location4Stitches}
+          location5Stitches={this.state.location5Stitches}
+          location6Stitches={this.state.location6Stitches}
+        />
       </View>
     );
   }
@@ -386,9 +336,8 @@ class Embroidery extends React.Component {
         <ScrollView>
           <View style={styles.container}>
             {this.state.showResults ? this.renderResults() : null}
-            {/* {this.renderInputOutputHeader()} */}
             {this.renderShirtQuantity()}
-            {this.renderEmbroidery()}
+            {this.renderEmbroideryStitchCountInputs()}
             {this.renderShirtCost()}
             {this.renderMarkUp()}
             {this.renderGetResultsButton()}
