@@ -48,6 +48,7 @@ class PrintSideTwoQuantity extends React.Component {
           onChangeText={text =>
             this.props.handlePrintSideTwoQuantityInput(text)
           }
+          keyboardType={"decimal-pad"}
           ref={ref => (this.middleRef = ref)}
           value={this.props.printSideTwoQuantity}
         />

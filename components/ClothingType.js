@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import { connect } from "react-redux";
 
@@ -11,18 +11,19 @@ const styles = StyleSheet.create({
   },
   clothingTypeLabel: {
     width: "30%",
-    textAlign: "center",
+
     borderWidth: 1,
     borderRadius: 5,
-    margin: 5,
-    fontWeight: "600"
+    margin: 5
   },
   clothingTypeLabel2: {
     width: "45%",
-    textAlign: "center",
     borderWidth: 1,
     borderRadius: 5,
-    margin: 5,
+    margin: 5
+  },
+  clothingTypeText: {
+    textAlign: "center",
     fontWeight: "600"
   }
 });
@@ -37,7 +38,10 @@ class ClothingType extends React.Component {
     return (
       <View style={{ width: "100%" }}>
         <View style={styles.clothingTypeContainer}>
-          <Text
+          <TouchableOpacity
+            onPress={() => {
+              this.props.handleClothingType("Tee");
+            }}
             style={
               this.props.clothingType === "Tee"
                 ? {
@@ -46,13 +50,13 @@ class ClothingType extends React.Component {
                   }
                 : styles.clothingTypeLabel
             }
-            onPress={() => {
-              this.props.handleClothingType("Tee");
-            }}
           >
-            Tee
-          </Text>
-          <Text
+            <Text style={styles.clothingTypeText}>Tee</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.handleClothingType("Jersey");
+            }}
             style={
               this.props.clothingType === "Jersey"
                 ? {
@@ -61,13 +65,13 @@ class ClothingType extends React.Component {
                   }
                 : styles.clothingTypeLabel
             }
-            onPress={() => {
-              this.props.handleClothingType("Jersey");
-            }}
           >
-            Jersey
-          </Text>
-          <Text
+            <Text style={styles.clothingTypeText}>Jersey</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.handleClothingType("Polo");
+            }}
             style={
               this.props.clothingType === "Polo"
                 ? {
@@ -76,15 +80,15 @@ class ClothingType extends React.Component {
                   }
                 : styles.clothingTypeLabel
             }
-            onPress={() => {
-              this.props.handleClothingType("Polo");
-            }}
           >
-            Polo
-          </Text>
+            <Text style={styles.clothingTypeText}>Polo</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.clothingTypeContainer}>
-          <Text
+          <TouchableOpacity
+            onPress={() => {
+              this.props.handleClothingType("Sweatshirt");
+            }}
             style={
               this.props.clothingType === "Sweatshirt"
                 ? {
@@ -93,13 +97,13 @@ class ClothingType extends React.Component {
                   }
                 : styles.clothingTypeLabel2
             }
-            onPress={() => {
-              this.props.handleClothingType("Sweatshirt");
-            }}
           >
-            Sweatshirt
-          </Text>
-          <Text
+            <Text style={styles.clothingTypeText}>Sweatshirt</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.handleClothingType("Hooded Sweatshirt");
+            }}
             style={
               this.props.clothingType === "Hooded Sweatshirt"
                 ? {
@@ -108,12 +112,9 @@ class ClothingType extends React.Component {
                   }
                 : styles.clothingTypeLabel2
             }
-            onPress={() => {
-              this.props.handleClothingType("Hooded Sweatshirt");
-            }}
           >
-            Hooded Sweatshirt
-          </Text>
+            <Text style={styles.clothingTypeText}>Hooded Sweatshirt</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

@@ -45,6 +45,7 @@ class ShirtCost extends React.Component {
         <TextInput
           style={styles.textInput}
           label={"Shirt Cost"}
+          keyboardType={"decimal-pad"}
           onChangeText={text => this.props.handleShirtCostInput(text)}
           value={this.props.shirtCost}
         />

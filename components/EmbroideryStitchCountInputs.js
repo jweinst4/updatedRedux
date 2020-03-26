@@ -48,6 +48,7 @@ class EmbroideryStitchCountInputs extends React.Component {
             onChangeText={text =>
               this.props.handleEmbroideryStitchCountInputs(text, 1)
             }
+            keyboardType={"decimal-pad"}
             value={this.props.location1Stitches}
           />
           <Text style={styles.output}>
@@ -62,6 +63,7 @@ class EmbroideryStitchCountInputs extends React.Component {
             onChangeText={text =>
               this.props.handleEmbroideryStitchCountInputs(text, 2)
             }
+            keyboardType={"decimal-pad"}
             value={this.props.location2Stitches}
           />
           <Text style={styles.output}>
@@ -76,6 +78,7 @@ class EmbroideryStitchCountInputs extends React.Component {
             onChangeText={text =>
               this.props.handleEmbroideryStitchCountInputs(text, 3)
             }
+            keyboardType={"decimal-pad"}
             value={this.props.location3Stitches}
           />
           <Text style={styles.output}>
@@ -90,6 +93,7 @@ class EmbroideryStitchCountInputs extends React.Component {
             onChangeText={text =>
               this.props.handleEmbroideryStitchCountInputs(text, 4)
             }
+            keyboardType={"decimal-pad"}
             value={this.props.location4Stitches}
           />
           <Text style={styles.output}>
@@ -104,6 +108,7 @@ class EmbroideryStitchCountInputs extends React.Component {
             onChangeText={text =>
               this.props.handleEmbroideryStitchCountInputs(text, 5)
             }
+            keyboardType={"decimal-pad"}
             value={this.props.location5Stitches}
           />
           <Text style={styles.output}>
@@ -118,6 +123,7 @@ class EmbroideryStitchCountInputs extends React.Component {
             onChangeText={text =>
               this.props.handleEmbroideryStitchCountInputs(text, 6)
             }
+            keyboardType={"decimal-pad"}
             value={this.props.location6Stitches}
           />
           <Text style={styles.output}>

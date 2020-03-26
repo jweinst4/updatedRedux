@@ -4,11 +4,10 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  TextInput,
   KeyboardAvoidingView,
-  ScrollView,
-  Button
+  ScrollView
 } from "react-native";
+
 import { connect } from "react-redux";
 import { calculatedPrice } from "../utilities/getResultsCalculator";
 import { parseResults } from "../utilities/parseResults";

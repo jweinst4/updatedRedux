@@ -48,6 +48,7 @@ class PrintSideOneQuantity extends React.Component {
           onChangeText={text =>
             this.props.handlePrintSideOneQuantityInput(text)
           }
+          keyboardType={"decimal-pad"}
           value={this.props.printSideOneQuantity}
         />
         <Text style={styles.output}>

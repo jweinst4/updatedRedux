@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://xc-i4b.jweinst4.pricingformula.exp.direct",
+  "packagerNgrokUrl": "https://packager.xc-i4b.jweinst4.pricingformula.exp.direct",
+  "ngrokPid": 68885
 }

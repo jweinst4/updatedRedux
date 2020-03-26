@@ -47,7 +47,9 @@ class MarkUp extends React.Component {
           label={"Mark Up"}
           onChangeText={text => this.props.handleMarkUpInput(text)}
           value={this.props.markUp}
+          keyboardType={"decimal-pad"}
         />
+
         <Text style={styles.output}>
           Mark Up: {parseFloat(this.props.markUp).toFixed(2)}%
         </Text>
